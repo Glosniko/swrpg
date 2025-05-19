@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mapa</title>
+    <style>
+        body {
+            margin: 0;
+            background: url('tlo.png') repeat;
+            background-size: auto;
+            color: white;
+            font-family: sans-serif;
+            display: flex;
+            min-height: 100vh;
+            overflow-x: auto;
+            overflow-y: auto;
+        }
+
+        .map-wrapper {
+            position: relative;
+            flex: 1;
+            background: url('galaktykabez.png') no-repeat center center;
+            background-size: contain;
+            max-width: 100%;
+            overflow: auto;
+        }
+
+        .info-panel {
+            width: 300px;
+            background-color: #111;
+            padding: 20px;
+            border-left: 2px solid #333;
+            overflow-y: auto;
+        }
+
+            .info-panel h2 {
+                margin-top: 0;
+                color: #00ffe0;
+            }
+
+        .index-hotspot {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 150px;
+            height: 92px;
+            background-image: url('statekmain.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            transition: filter 0.3s, transform 0.3s;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+            .index-hotspot:hover {
+                filter: brightness(1.5);
+                transform: scale(1.05);
+            }
+
+        .index-link {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .Gorse-hotspot {
+            position: absolute;
+            top: 66.5%;
+            left: 47.5%;
+            width: 50px;
+            height: 50px;
+            background-image: url('Gorse.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            transition: filter 0.3s, transform 0.3s;
+            cursor: pointer;
+        }
+
+            .Gorse-hotspot:hover {
+                filter: brightness(1.5);
+                transform: scale(1.05);
+            }
+    </style>
+</head>
+<body>
+    <div class="map-wrapper" id="map">
+        <div class="index-hotspot">
+            <a href="index.html" class="index-link"></a>
+        </div>
+        <div class="Gorse-hotspot" onclick="showInfo('Gorse')"></div>
+    </div>
+
+    <div class="info-panel" id="infoPanel">
+        <h2>Kliknij planetę</h2>
+        <p>Po kliknięciu zobaczysz informacje o danej planecie.</p>
+    </div>
+
+    <script>
+        const planetData = {
+            'Tatooine': {
+                title: 'Tatooine',
+                description: [
+                    'Typ: Pustynna planeta',
+                    'Lokalizacja: Układ Tatoo',
+                    'Zależność: Niepodległa',
+                    'Atmosfera: Zdatna do oddychania',
+                    'Powierzchnia: Pustynia, wydmy, osady'
+                ]
+            },
+            'Coruscant': {
+                title: 'Coruscant',
+                description: [
+                    'Typ: Planeta-miasto',
+                    'Lokalizacja: Sektor Coruscant',
+                    'Zależność: Republika / Imperium',
+                    'Atmosfera: Zdatna do oddychania',
+                    'Powierzchnia: Całkowicie zurbanizowana'
+                ]
+            },
+            'Gorse': {
+                title: 'Gorse',
+                description: [
+                    '<strong>Typ:</strong> Skalista planeta przemysłowa',
+                    '<strong>Lokalizacja:</strong> Sektor Gorse, Wewnętrzne Rubieże',
+                    '<strong>Zależność:</strong> Królestwo Zeltros - Konsorcjum Hapes',
+                    '<strong>Stolica:</strong> Stormhead',
+                    '<strong>Powierzchnia:</strong> 83% teren skalisty, 12% zanieczyszczone morza, 5% martwe strefy',
+                    '<strong>Atmosfera:</strong> Zdatna do oddychania'
+                ]
+            }
+        };
+
+        function showInfo(name) {
+            const info = planetData[name];
+            const panel = document.getElementById('infoPanel');
+            panel.innerHTML = `<h2>${info.title}</h2>` + info.description.map(line => `<p>${line}</p>`).join('');
+        }
+    </script>
+</body>
+</html>
+

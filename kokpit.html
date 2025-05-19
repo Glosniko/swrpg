@@ -1,0 +1,83 @@
+<!-- kokpit.html -->
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kokpit - Autoryzacja</title>
+    <style>
+        body {
+            background: black;
+            color: lime;
+            font-family: monospace;
+            text-align: center;
+            padding-top: 50px;
+        }
+
+        input, button {
+            font-size: 1.2em;
+            padding: 10px;
+        }
+
+        #loadingScreen {
+            display: none;
+            margin-top: 40px;
+        }
+
+        #progressBar {
+            width: 0%;
+            height: 25px;
+            background-color: lime;
+            transition: width 0.05s;
+        }
+
+        #barContainer {
+            width: 80%;
+            margin: auto;
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Panel Nawigacyjny</h1>
+    <form id="loginForm">
+        <input type="text" id="codeInput" placeholder="WprowadŸ kod" />
+        <button onclick="startLaunch()">Start</button>
+    </form>
+
+    <div id="loadingScreen">
+        <p>Procedura w toku...</p>
+        <div id="barContainer"><div id="progressBar"></div></div>
+        <p id="percent">0%</p>
+    </div>
+
+    <audio id="launchSound" src="warp-sound.mp3"></audio>
+
+    <script>
+    const launchTimes = {
+      "NAV22": 5000,
+      "NAV77": 10000,
+      "OVERRIDE": 2000
+    };
+
+    function startLaunch() {
+      event.preventDefault();
+      const code = document.getElementById("codeInput").value;
+      const duration = launchTimes[code] || 7000; // domyœlny czas
+
+      document.getElementById("loginForm").style.display = "none";
+      document.getElementById("loadingScreen").style.display = "block";
+      document.getElementById("launchSound").play();
+
+      let progress = 0;
+      const intervalTime = duration / 100;
+      const interval = setInterval(() => {
+        progress++;
+        document.getElementById("progressBar").style.width = progress + "%";
+        document.getElementById("percent").innerText = progress + "%";
+        if (progress >= 100) clearInterval(interval);
+      }, intervalTime);
+    }
+    </script>
+</body>
+</html>

@@ -2,19 +2,22 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Statek RPG - Plan</title>
     <style>
         html, body {
             margin: 0;
             padding: 0;
             background-color: black;
-            overflow: hidden;
+            overflow-x: auto; /* Umożliwia przewijanie w poziomie */
+            overflow-y: auto;
+            width: 100vw;
+            min-height: 100vh;
         }
 
         .map-wrapper {
             position: relative;
-            width: fit-content;
-            margin: 0 auto;
+            width: max-content; /* Pozwala mapie być większą niż ekran */
         }
 
         .map-image {
@@ -27,7 +30,7 @@
 
         .kokpit-hotspot {
             position: absolute;
-            top: 496px; /* pozycja wzgl�dem mapy */
+            top: 496px;
             left: 1087px;
             width: 162px;
             height: 159px;
@@ -38,9 +41,9 @@
             cursor: pointer;
         }
 
-        .dziala-hotspot{
+        .dziala-hotspot {
             position: absolute;
-            top:942px;
+            top: 942px;
             left: 613px;
             width: 84px;
             height: 84px;
@@ -64,39 +67,20 @@
             cursor: pointer;
         }
 
-            .kokpit-hotspot:hover {
+            .kokpit-hotspot:hover,
+            .dziala-hotspot:hover,
+            .mapa-hotspot:hover {
                 filter: brightness(1.5);
                 transform: scale(1.05);
             }
 
-        .kokpit-link {
-            display: block;
-            width: 100%;
-            height: 100%;
-        }
-
-        .dziala-hotspot:hover {
-            filter: brightness(1.5);
-            transform: scale(1.05);
-        }
-
-        .dziala-link {
-            display: block;
-            width: 100%;
-            height: 100%;
-        }
-
-        .mapa-hotspot:hover {
-            filter: brightness(1.5);
-            transform: scale(1.05);
-        }
-
+        .kokpit-link,
+        .dziala-link,
         .mapa-link {
             display: block;
             width: 100%;
             height: 100%;
         }
-
     </style>
 </head>
 <body>
@@ -112,6 +96,6 @@
             <a href="mapa.html" class="mapa-link"></a>
         </div>
     </div>
-
 </body>
 </html>
+

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tryb bojowy</title>
     <style>
         body {
@@ -10,11 +10,156 @@
             color: red;
             font-family: sans-serif;
             text-align: center;
-            padding-top: 50px;
+            padding: 50px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 40px auto;
+            background-color: #111;
+            color: limegreen;
+        }
+
+        th, td {
+            border: 1px solid white;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #222;
+        }
+
+        h2 {
+            margin-top: 60px;
+            color: #ff3333;
         }
     </style>
 </head>
 <body>
     <h1>Tryb bojowy aktywowany!</h1>
+
+    <h2>Manewry i działania załogi</h2>
+    <table>
+        <tr>
+            <th>Akcja</th>
+            <th>Tylko Pilot</th>
+            <th>Sylwetka</th>
+            <th>Szybkość</th>
+            <th>Opis</th>
+        </tr>
+        <tr>
+            <td>Przyspieszenie / Zwolnienie</td>
+            <td>Tak</td>
+            <td>Każda</td>
+            <td>Każda</td>
+            <td>Pilot może zmienić prędkość o ±1 (min. 0, max. maks. prędkość statku).</td>
+        </tr>
+        <tr>
+            <td>Lot / Jazda</td>
+            <td>Tak</td>
+            <td>Każda</td>
+            <td>Każda</td>
+            <td>
+                Zależnie od szybkości, potrzebne są manewry do przemieszczania się po strefach (bliski, krótki, średni). 1 manewr na poruszanie się, 2 manewry na przeskok do innej odległości.(1 = bliski do krótki, 2-4 = bliski w średni, 5-6 = bliski w długi)
+            </td>
+        </tr>
+        <tr>
+            <td>Pełna moc</td>
+            <td>Tak</td>
+            <td>1–4</td>
+            <td>Każda</td>
+            <td>Pozwala rozpędzić się do maks. prędkości, odejmując strain w zależności od wzrostu.</td>
+        </tr>
+        <tr>
+            <td>Przekierować moc osłon</td>
+            <td>Nie</td>
+            <td>Każda</td>
+            <td>Każda</td>
+            <td>Osoba odpowiedzialna za osłony może przekierować 1 punkt defense. Działa tylko jeśli są osłony.</td>
+        </tr>
+        <tr>
+            <td>Manewr wymijający</td>
+            <td>Tak</td>
+            <td>1–4</td>
+            <td>3+</td>
+            <td>Unik ostrzału, kolizji lub katastrofy. Zwiększa trudność ataku do końca tury.</td>
+        </tr>
+        <tr>
+            <td>Utrzymaj cel</td>
+            <td>Tak</td>
+            <td>1–4</td>
+            <td>3+</td>
+            <td>Skupienie się na celu. Ułatwia ataki w obie strony.</td>
+        </tr>
+        <tr>
+            <td>Kontrola uszkodzeń</td>
+            <td>Nie</td>
+            <td>Każda</td>
+            <td>Każda</td>
+            <td>Test mechaniki pozwala zredukować 1 strain lub próbować usunąć krytyczne uszkodzenia.</td>
+        </tr>
+        <tr>
+            <td>Dodatkowa akcja</td>
+            <td>Nie</td>
+            <td>Każda</td>
+            <td>Każda</td>
+            <td>Można wykonać jedną akcję z drugiej tabeli.</td>
+        </tr>
+    </table>
+
+    <h2>Akcje dodatkowe (załoga)</h2>
+    <table>
+        <tr>
+            <th>Akcja</th>
+            <th>Umiejętność i trudność</th>
+            <th>Wynik</th>
+        </tr>
+        <tr>
+            <td>Badaj Trasę</td>
+            <td>Przeciętny Astrogation lub Ciężki Perception</td>
+            <td>Badasz trasę statku i planujesz bezpieczny przejazd/przelot. Każdy sukces usuwa 1 niekorzyść z powodu środowiska</td>
+        </tr>
+        <tr>
+            <td>Drugi Pilot</td>
+            <td>Przeciętny Piloting</td>
+            <td>Pomagasz pilotowi w sterowaniu. Każdy sukces obniża poziom trudności kolejnego testu piltoa w Piloting o 1</td>
+        </tr>
+        <tr>
+            <td>Zakłócaj</td>
+            <td>Przeciętny Computers</td>
+            <td>Zakłócasz comsy wroga. Po sukcesie, wróg musi zdać przeciętny test Computers. Za każde 2 sukcesy podbija trudność testu o 1</td>
+        </tr>
+        <tr>
+            <td>Tarczuj</td>
+            <td>Ciężki Mechanics</td>
+            <td>Przekierowanie mocy z tarcz. Tylko jeśli statek ma defense. Po sukcesie otrzymuje 1 strain, ale +1 defense w 1 miejscu do początku kolejnej tury</td>
+        </tr>
+        <tr>
+            <td>Ręczne Naprawy</td>
+            <td>Ciężki Athletics</td>
+            <td>Gdy macie odpowiednie narzędzia, można odnowić 1 puntk kadłuba. +1 za każde 2 sukcesy.</td>
+        </tr>
+        <tr>
+            <td>Skoordynowany Ostrzał</td>
+            <td>Ciężki Leadership lub Discipline</td>
+            <td>Analizujesz taktykę wroga. Twój sojusznik może dodać kostkę kożyszci do następnego ataku. Każde 2 sukcesy pozwalajką dodatkowej osobie dodać kostkę do ataku</td>
+        </tr>
+        <tr>
+            <td>Rozproszenie torped</td>
+            <td>Przeciętny Computers lub Ciężki Vigilance</td>
+            <td>Śledzisz trajektorię pocisków wroga i używasz systemów statku do przeszkodzenia im. Wszystkie naprowadzające pocsiki mają trudność +1. Dodatkowy +1 za każde 2 korzyści</td>
+        </tr>
+        <tr>
+            <td>Włam do systemów wroga</td>
+            <td>Ciężki Computers</td>
+            <td>Próbujesz zakłócić waszym sygnałem systemy wroga. Po sukcesie redukujesz defense jednej strefy wrogiego statku, na ilość rund równą sukcesom. Kryt = wyłączenie dział na 1 rundę </td>
+        </tr>
+        <tr>
+            <td>Badaj Wroga</td>
+            <td>Przeciętny Computers lub Ciężki Vigilance</td>
+            <td>Skanujesz wrogi statek. Możesz się dowiedzieć jakie ma działa, modyfikacje, wytrzymałość. Za 2 korzyści, możesz wiedzieć ile ma obecnie wytrzymałości</td>
+        </tr>
+    </table>
 </body>
 </html>

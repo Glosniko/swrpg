@@ -2,8 +2,8 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Kokpit - Autoryzacja</title>
     <style>
         body {
@@ -36,48 +36,80 @@
             margin: auto;
             background-color: #333;
         }
+
+        #initButton {
+            display: none;
+            margin-top: 20px;
+            font-size: 1.2em;
+            padding: 10px 20px;
+            background-color: lime;
+            color: black;
+            border: none;
+            cursor: pointer;
+        }
+
+            #initButton:hover {
+                background-color: #9acd32;
+            }
     </style>
 </head>
 <body>
     <h1>Panel Nawigacyjny</h1>
     <form id="loginForm">
-        <input type="text" id="codeInput" placeholder="WprowadŸ kod" />
-        <button onclick="startLaunch()">Start</button>
+        <input type="text" id="codeInput" placeholder="WprowadÅº kod" />
+        <button type="submit" onclick="startLaunch(event)">Start</button>
     </form>
 
     <div id="loadingScreen">
         <p>Procedura w toku...</p>
         <div id="barContainer"><div id="progressBar"></div></div>
         <p id="percent">0%</p>
+        <button id="initButton" onclick="window.location.href='mapa.html'">Inicjuj skok</button>
     </div>
 
     <audio id="launchSound" src="warp-sound.mp3"></audio>
 
     <script>
-    const launchTimes = {
-      "NAV22": 5000,
-      "NAV77": 10000,
-      "OVERRIDE": 2000
-    };
+        const launchTimes = {
+            "NAV12": 30000,
+            "NAV23": 60000,
+            "NAV37": 90000,
+            "NAV48": 120000,
+            "NAV52": 150000,
+            "NAV67": 180000,
+            "NAV74": 210000,
+            "NAV85": 240000,
+            "NAV91": 270000
+        };
 
-    function startLaunch() {
-      event.preventDefault();
-      const code = document.getElementById("codeInput").value;
-      const duration = launchTimes[code] || 7000; // domyœlny czas
+        function startLaunch(event) {
+            event.preventDefault();
 
-      document.getElementById("loginForm").style.display = "none";
-      document.getElementById("loadingScreen").style.display = "block";
-      document.getElementById("launchSound").play();
+            const code = document.getElementById("codeInput").value.trim();
+            const duration = launchTimes[code] || 7000; // domyÅ›lny czas 7 sekund
 
-      let progress = 0;
-      const intervalTime = duration / 100;
-      const interval = setInterval(() => {
-        progress++;
-        document.getElementById("progressBar").style.width = progress + "%";
-        document.getElementById("percent").innerText = progress + "%";
-        if (progress >= 100) clearInterval(interval);
-      }, intervalTime);
-    }
+            document.getElementById("loginForm").style.display = "none";
+            document.getElementById("loadingScreen").style.display = "block";
+            document.getElementById("initButton").style.display = "none";
+
+            const launchSound = document.getElementById("launchSound");
+            launchSound.currentTime = 0;
+            launchSound.play();
+
+            let progress = 0;
+            const intervalTime = duration / 100;
+
+            const interval = setInterval(() => {
+                progress++;
+                document.getElementById("progressBar").style.width = progress + "%";
+                document.getElementById("percent").innerText = progress + "%";
+
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    document.getElementById("initButton").style.display = "inline-block";
+                }
+            }, intervalTime);
+        }
     </script>
 </body>
 </html>

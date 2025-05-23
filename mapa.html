@@ -12,8 +12,9 @@
             color: white;
             font-family: sans-serif;
             display: flex;
-            height: 100vh;
-            overflow: hidden;
+            min-height: 100vh;
+            overflow-x: auto;
+            overflow-y: auto;
         }
 
         .map-wrapper {
@@ -21,13 +22,15 @@
             flex: 1;
             background: url('galaktykabez.png') no-repeat center center;
             background-size: contain;
+            max-width: 100%;
+            overflow: auto;
         }
 
         .info-panel {
             width: 300px;
             background-color: #111;
             padding: 20px;
-            border-left: 2px solid #333;
+            border-left: 2px solid #00ff00; /* zielone obramowanie */
             overflow-y: auto;
         }
 
@@ -61,23 +64,31 @@
             height: 100%;
         }
 
-        .Gorse-hotspot {
-            position: absolute;
-            top: 66.5%;
-            left: 47.5%;
-            width: 50px;
-            height: 50px;
-            background-image: url('Gorse.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            transition: filter 0.3s, transform 0.3s;
-            cursor: pointer;
+        .planet-list {
+            margin-top: 20px;
         }
 
-            .Gorse-hotspot:hover {
-                filter: brightness(1.5);
-                transform: scale(1.05);
+            .planet-list h3 {
+                color: #00ff00;
+                font-size: 16px;
+                margin-bottom: 10px;
             }
+
+            .planet-list ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            .planet-list li {
+                cursor: pointer;
+                color: #00ff00;
+                margin-bottom: 5px;
+            }
+
+                .planet-list li:hover {
+                    text-decoration: underline;
+                }
     </style>
 </head>
 <body>
@@ -85,34 +96,94 @@
         <div class="index-hotspot">
             <a href="index.html" class="index-link"></a>
         </div>
-        <div class="Gorse-hotspot" onclick="showInfo('Gorse')"></div>
     </div>
 
     <div class="info-panel" id="infoPanel">
         <h2>Kliknij planetę</h2>
         <p>Po kliknięciu zobaczysz informacje o danej planecie.</p>
+        <div class="planet-list" id="planetList">
+            <h3>Lista planet:</h3>
+            <ul id="planetLinks"></ul>
+        </div>
     </div>
 
     <script>
         const planetData = {
-            'Tatooine': {
-                title: 'Tatooine',
+            'Zeltros': {
+                title: 'Zeltros',
                 description: [
-                    'Typ: Pustynna planeta',
-                    'Lokalizacja: Układ Tatoo',
-                    'Zależność: Niepodległa',
-                    'Atmosfera: Zdatna do oddychania',
-                    'Powierzchnia: Pustynia, wydmy, osady'
+                    '<strong>Typ:</strong> Tropikalna planeta rozrywkowa',
+                    '<strong>Lokalizacja:</strong> Sektor Inner Rim',
+                    '<strong>Zależność:</strong> Królestwo Zeltros',
+                    '<strong>Stolica:</strong> Zeltros Prime',
+                    '<strong>Powierzchnia:</strong> 60% dżungle, 20% plaże, 20% miasta rozrywki',
+                    '<strong>Atmosfera:</strong> Zdatna do oddychania'
                 ]
             },
-            'Coruscant': {
-                title: 'Coruscant',
+            'Cato Neimoidia': {
+                title: 'Cato Neimoidia',
                 description: [
-                    'Typ: Planeta-miasto',
-                    'Lokalizacja: Sektor Coruscant',
-                    'Zależność: Republika / Imperium',
-                    'Atmosfera: Zdatna do oddychania',
-                    'Powierzchnia: Całkowicie zurbanizowana'
+                    '<strong>Typ:</strong> Górzysta planeta z miastami zawieszonymi nad przepaściami',
+                    '<strong>Lokalizacja:</strong> Kolonie',
+                    '<strong>Zależność:</strong> Konfederacja Niezależnych Systemów (wcześniej Federacja Handlowa)',
+                    '<strong>Stolica:</strong> Ziemie Łańcuchowe',
+                    '<strong>Powierzchnia:</strong> 65% góry, 25% wąwozy i kaniony, 10% miasta na zawieszonych mostach',
+                    '<strong>Atmosfera:</strong> Zdatna do oddychania'
+                ]
+            },
+            'Kashyyyk': {
+                title: 'Kashyyyk',
+                description: [
+                    '<strong>Typ:</strong> Leśna planeta z gęstymi, wysokimi drzewami',
+                    '<strong>Lokalizacja:</strong> Sektor Mytaranor',
+                    '<strong>Zależność:</strong> Imperium Galaktyczne / Nowa Republika',
+                    '<strong>Stolica:</strong> Rwookrrorro',
+                    '<strong>Powierzchnia:</strong> 70% lasy (trójwarstwowe), 20% oceany, 10% miasta w koronach drzew',
+                    '<strong>Atmosfera:</strong> Zdatna do oddychania'
+                ]
+            },
+            'Bracca': {
+                title: 'Bracca',
+                description: [
+                    '<strong>Typ:</strong> Przemysłowe złomowisko',
+                    '<strong>Lokalizacja:</strong> Sekcja Korporacyjna, Wewnętrzne Rubieże',
+                    '<strong>Zależność:</strong> Imperium Galaktyczne',
+                    '<strong>Stolica:</strong> Brak oficjalnej stolicy',
+                    '<strong>Powierzchnia:</strong> 80% złomowiska, 10% tereny przemysłowe, 10% osady pracownicze',
+                    '<strong>Atmosfera:</strong> Zdatna do oddychania (często zanieczyszczona)'
+                ]
+            },
+            'Hapes': {
+                title: 'Hapes',
+                description: [
+                    '<strong>Typ:</strong> Oceaniczna planeta królewska',
+                    '<strong>Lokalizacja:</strong> Sektor Hapes',
+                    '<strong>Zależność:</strong> Konsorcjum Hapes',
+                    '<strong>Stolica:</strong> Ta\'a Chume\'Dan',
+                    '<strong>Powierzchnia:</strong> 70% oceany, 20% archipelagi, 10% pałacowe miasta',
+                    '<strong>Atmosfera:</strong> Zdatna do oddychania'
+                ]
+            },
+            'Gallinor': {
+                title: 'Gallinor',
+                description: [
+                    '<strong>Typ:</strong> Surowa, górska planeta legendarna',
+                    '<strong>Lokalizacja:</strong> Nieznana dokładna lokalizacja (znana z legend)',
+                    '<strong>Zależność:</strong> Niezależna',
+                    '<strong>Stolica:</strong> Nieznana',
+                    '<strong>Powierzchnia:</strong> 90% góry i klify, 5% doliny, 5% jaskinie i ukryte enklawy',
+                    '<strong>Atmosfera:</strong> Zdatna do oddychania'
+                ]
+            },
+            'Taanab': {
+                title: 'Taanab',
+                description: [
+                    '<strong>Typ:</strong> Rolnicza planeta z żyzną glebą',
+                    '<strong>Lokalizacja:</strong> Kolonie, sektor Taanab',
+                    '<strong>Zależność:</strong> Sojusz Rebeliantów / Nowa Republika',
+                    '<strong>Stolica:</strong> Pandath',
+                    '<strong>Powierzchnia:</strong> 60% pola uprawne, 25% wioski i miasta, 15% rzeki i doliny',
+                    '<strong>Atmosfera:</strong> Zdatna do oddychania'
                 ]
             },
             'Gorse': {
@@ -128,11 +199,35 @@
             }
         };
 
+
+
         function showInfo(name) {
             const info = planetData[name];
             const panel = document.getElementById('infoPanel');
-            panel.innerHTML = `<h2>${info.title}</h2>` + info.description.map(line => `<p>${line}</p>`).join('');
+            panel.innerHTML = `
+                    <h2>${info.title}</h2>
+                    ${info.description.map(line => `<p>${line}</p>`).join('')}
+                    <div class="planet-list">
+                        <h3>Lista planet:</h3>
+                        <ul id="planetLinks"></ul>
+                    </div>
+                `;
+            renderPlanetList();
         }
+
+        function renderPlanetList() {
+            const list = document.getElementById('planetLinks');
+            list.innerHTML = '';
+            Object.keys(planetData).forEach(planet => {
+                const li = document.createElement('li');
+                li.textContent = planet;
+                li.onclick = () => showInfo(planet);
+                list.appendChild(li);
+            });
+        }
+
+        // Załaduj listę planet przy starcie
+        renderPlanetList();
     </script>
 </body>
 </html>

@@ -9,70 +9,71 @@
             margin: 0;
             padding: 0;
             background-color: black;
-            overflow-x: auto; /* Umożliwia przewijanie w poziomie */
-            overflow-y: auto;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+        }
+
+        .scroll-container {
             width: 100vw;
-            min-height: 100vh;
+            height: 100vh;
+            overflow-x: auto;
+            overflow-y: auto;
+            position: relative;
         }
 
         .map-wrapper {
             position: relative;
-            width: max-content; /* Pozwala mapie być większą niż ekran */
+            width: 1600px; /* lub większa szerokość twojej mapy */
+            height: auto;
         }
 
         .map-image {
             display: block;
-            width: auto;
+            width: 100%;
             height: auto;
-            max-width: none;
-            max-height: none;
+        }
+
+        .kokpit-hotspot,
+        .dziala-hotspot,
+        .mapa-hotspot {
+            position: absolute;
+            background-size: contain;
+            background-repeat: no-repeat;
+            transition: filter 0.3s, transform 0.3s;
+            cursor: pointer;
         }
 
         .kokpit-hotspot {
-            position: absolute;
             top: 496px;
             left: 1087px;
             width: 162px;
             height: 159px;
             background-image: url('kokpit_pt.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            transition: filter 0.3s, transform 0.3s;
-            cursor: pointer;
         }
 
         .dziala-hotspot {
-            position: absolute;
             top: 942px;
             left: 613px;
             width: 84px;
             height: 84px;
             background-image: url('dziala_pt.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            transition: filter 0.3s, transform 0.3s;
-            cursor: pointer;
         }
 
         .mapa-hotspot {
-            position: absolute;
             top: 30px;
-            left: -470px;
+            left: -470px; /* Jeśli mapa ma przesunięcie na lewo, możesz je dostosować */
             width: 300px;
             height: 300px;
             background-image: url('ikon.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            transition: filter 0.3s, transform 0.3s;
-            cursor: pointer;
         }
 
-            .kokpit-hotspot:hover,
-            .dziala-hotspot:hover,
-            .mapa-hotspot:hover {
-                filter: brightness(1.5);
-                transform: scale(1.05);
-            }
+        .kokpit-hotspot:hover,
+        .dziala-hotspot:hover,
+        .mapa-hotspot:hover {
+            filter: brightness(1.5);
+            transform: scale(1.05);
+        }
 
         .kokpit-link,
         .dziala-link,
@@ -84,18 +85,19 @@
     </style>
 </head>
 <body>
-    <div class="map-wrapper">
-        <img src="mapa-statku.png" class="map-image" alt="Mapa statku">
-        <div class="kokpit-hotspot">
-            <a href="kokpit.html" class="kokpit-link"></a>
-        </div>
-        <div class="dziala-hotspot">
-            <a href="dzialka.html" class="dziala-link"></a>
-        </div>
-        <div class="mapa-hotspot">
-            <a href="mapa.html" class="mapa-link"></a>
+    <div class="scroll-container">
+        <div class="map-wrapper">
+            <img src="mapa-statku.png" class="map-image" alt="Mapa statku">
+            <div class="kokpit-hotspot">
+                <a href="kokpit.html" class="kokpit-link"></a>
+            </div>
+            <div class="dziala-hotspot">
+                <a href="dzialka.html" class="dziala-link"></a>
+            </div>
+            <div class="mapa-hotspot">
+                <a href="mapa.html" class="mapa-link"></a>
+            </div>
         </div>
     </div>
 </body>
 </html>
-
